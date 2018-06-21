@@ -7,6 +7,8 @@ contract Bolao {
     }
 
     function entrar() public payable {
+        require(msg.value > 0.1 ether);
+        
         pessoas.push(msg.sender);
     }
 }
