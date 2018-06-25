@@ -14,11 +14,21 @@ contract Bolao {
     }
     
     function random() private view returns(uint){
-        return uint(keccak256(block.difficulty, now, players));
+        return uint(keccak256(block.difficulty, now, pessoas));
     }
     
-    function obterGanhador() public {
-        uint idx = random() % players.length;        
-        players[idx].transfer(this.balance);
+    function obterGanhador() public somenteManager {
+        uint idx = random() % pessoas.length;        
+        pessoas[idx].transfer(this.balance);
+        pessoas = new address[](0);                
+    }
+
+    function getPessoas() public view returns (address[]) {
+        return pessoas;
+    }
+
+    modifier somenteManager(){
+        require(manager == msg.sender)
+        _;
     }
 }
