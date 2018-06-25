@@ -12,4 +12,13 @@ contract Bolao {
         
         pessoas.push(msg.sender);
     }
+    
+    function random() private view returns(uint){
+        return uint(keccak256(block.difficulty, now, players));
+    }
+    
+    function obterGanhador() public {
+        uint idx = random() % players.length;        
+        players[idx].transfer(this.balance);
+    }
 }
