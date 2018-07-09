@@ -1,5 +1,6 @@
 const HDWallet = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
+
 const { interface, bytecode} = require('./compile');
 
 // Tendo acesso a uma account...

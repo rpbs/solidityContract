@@ -1,4 +1,3 @@
-
 contract Bolao {
     address public manager;
     address[] public pessoas;
@@ -17,7 +16,8 @@ contract Bolao {
         return uint(keccak256(block.difficulty, now, pessoas));
     }
     
-    function obterGanhador() public somenteManager {
+    function obterGanhador() public {
+        require(manager == msg.sender);
         uint idx = random() % pessoas.length;        
         pessoas[idx].transfer(this.balance);
         pessoas = new address[](0);                
@@ -25,10 +25,5 @@ contract Bolao {
 
     function getPessoas() public view returns (address[]) {
         return pessoas;
-    }
-
-    modifier somenteManager(){
-        require(manager == msg.sender)
-        _;
     }
 }
