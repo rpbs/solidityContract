@@ -1,6 +1,7 @@
 contract Bolao {
     address public manager;
-    address[] public pessoas;
+    address[] public pessoas;    
+    address public vencedor;
 
     function Bolao() public {
         manager = msg.sender;
@@ -20,6 +21,7 @@ contract Bolao {
         require(manager == msg.sender);
         uint idx = random() % pessoas.length;        
         pessoas[idx].transfer(this.balance);
+        vencedor = pessoas[idx];
         pessoas = new address[](0);                
     }
 
